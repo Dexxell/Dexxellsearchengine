@@ -28,8 +28,14 @@
         h1 {
             font-size: 2.5em;
         }
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
         button {
-            margin-top: 20px;
             padding: 10px 20px;
             background-color: #8A2BE2;
             color: white;
@@ -49,22 +55,28 @@
 <body>
     <div class="container">
         <h1>Welcome to Dexxell Browser</h1>
-        <p id="message">Explore the universe with us!</p>
-        <button id="explore-btn">Click to Explore</button>
+        <p>Use the search box below to explore the web!</p>
     </div>
 
     <!-- Custom Search Engine -->
     <div class="container">
         <h2>Search the Web</h2>
+        <input type="text" id="search-input" placeholder="Type your search here...">
+        <button id="search-btn">Search</button>
         <script async src="https://cse.google.com/cse.js?cx=0190de6bbef6f4f81"></script>
         <div class="gcse-searchresults-only"></div>
     </div>
 
     <script>
-        // JavaScript to make the button interactive
-        document.getElementById('explore-btn').addEventListener('click', function() {
-            const message = document.getElementById('message');
-            message.textContent = 'You are now exploring the depths of the Nebula!';
+        // JavaScript to handle search button click
+        document.getElementById('search-btn').addEventListener('click', function() {
+            const query = document.getElementById('search-input').value;
+            if (query) {
+                const searchResults = document.querySelector('.gcse-searchresults-only');
+                searchResults.innerHTML = ''; // Clear previous results
+                const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                window.open(searchUrl, '_blank'); // Open search results in a new tab
+            }
         });
     </script>
 </body>
